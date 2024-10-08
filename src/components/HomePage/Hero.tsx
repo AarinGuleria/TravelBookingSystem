@@ -116,12 +116,63 @@ const Benefits: React.FC = () => {
 
 // FeaturedPlacesToStay component
 const FeaturedPlacesToStay: React.FC = () => {
+  const [selectedPlace, setSelectedPlace] = React.useState<string | null>(null);
+
+  const places = [
+    {
+      title: "Entire cabin - 10 beds",
+      name: "Best Western Cedars...",
+      address: "1 Anzinger Court",
+      price: "$28/night",
+      rating: 28,
+      description: "A cozy cabin nestled in the woods, perfect for large groups or family gatherings.",
+    },
+    {
+      title: "Entire cabin - 6 beds",
+      name: "Bell By Greene King Inns",
+      address: "32923 Judy Hill",
+      price: "$250/night",
+      rating: 45,
+      description: "Charming inn with a rustic feel, offering comfort and a taste of local hospitality.",
+    },
+    {
+      title: "Luxury apartment - 3 beds",
+      name: "The Ritz-Carlton Residences",
+      address: "15 Central Park West",
+      price: "$500/night",
+      rating: 49,
+      description: "Opulent city living with breathtaking views and world-class amenities.",
+    },
+    {
+      title: "Beachfront villa - 8 beds",
+      name: "Sunset Paradise Resort",
+      address: "789 Ocean Drive",
+      price: "$350/night",
+      rating: 47,
+      description: "Luxurious beachfront property offering stunning ocean views and direct beach access.",
+    },
+    {
+      title: "Mountain chalet - 5 beds",
+      name: "Alpine Lodge Retreat",
+      address: "42 Evergreen Lane",
+      price: "$180/night",
+      rating: 41,
+      description: "Scenic mountain getaway perfect for ski enthusiasts and nature lovers.",
+    },
+    {
+      title: "City loft - 2 beds",
+      name: "Urban Oasis Suites",
+      address: "567 Downtown Avenue",
+      price: "$150/night",
+      rating: 39,
+      description: "Modern loft in the heart of the city, ideal for urban explorers and business travelers.",
+    },
+  ];
+
   return (
     <section className="py-16 bg-gradient-to-br from-indigo-900 to-purple-900 dark:from-gray-100 dark:to-gray-200 transition-colors duration-300">
-      {/* Glassmorphism background for light theme */}
       <div className="absolute inset-0 bg-white bg-opacity-100 backdrop-filter backdrop-blur-lg hidden dark:block"></div>
 
-      {/* Royal blurred color circles */}
       <div className="absolute top-0 right-0 w-128 h-128 bg-royal-blue rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
       <div className="absolute bottom-0 left-0 w-128 h-128 bg-royal-purple rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
 
@@ -145,53 +196,11 @@ const FeaturedPlacesToStay: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Entire cabin - 10 beds",
-              name: "Best Western Cedars...",
-              address: "1 Anzinger Court",
-              price: "$28/night",
-              rating: 28,
-            },
-            {
-              title: "Entire cabin - 6 beds",
-              name: "Bell By Greene King Inns",
-              address: "32923 Judy Hill",
-              price: "$250/night",
-              rating: 45,
-            },
-            {
-              title: "Luxury apartment - 3 beds",
-              name: "The Ritz-Carlton Residences",
-              address: "15 Central Park West",
-              price: "$500/night",
-              rating: 49,
-            },
-            {
-              title: "Beachfront villa - 8 beds",
-              name: "Sunset Paradise Resort",
-              address: "789 Ocean Drive",
-              price: "$350/night",
-              rating: 47,
-            },
-            {
-              title: "Mountain chalet - 5 beds",
-              name: "Alpine Lodge Retreat",
-              address: "42 Evergreen Lane",
-              price: "$180/night",
-              rating: 41,
-            },
-            {
-              title: "City loft - 2 beds",
-              name: "Urban Oasis Suites",
-              address: "567 Downtown Avenue",
-              price: "$150/night",
-              rating: 39,
-            },
-          ].map((place, index) => (
+          {places.map((place, index) => (
             <div
               key={index}
-              className="bg-indigo-800 bg-opacity-20 dark:bg-white dark:bg-opacity-90 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out"
+              className="bg-indigo-800 bg-opacity-20 dark:bg-white dark:bg-opacity-90 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+              onClick={() => setSelectedPlace(place.name)}
             >
               <img
                 src={`https://source.unsplash.com/random/600x400?hotel,${index}`}
@@ -221,6 +230,36 @@ const FeaturedPlacesToStay: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {selectedPlace && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-lg max-w-2xl w-full">
+              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
+                {places.find(place => place.name === selectedPlace)?.name}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                {places.find(place => place.name === selectedPlace)?.description}
+              </p>
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-gray-800 dark:text-white font-bold">
+                  {places.find(place => place.name === selectedPlace)?.price}
+                </p>
+                <div className="flex items-center bg-purple-700 rounded-full px-3 py-1">
+                  <span className="text-yellow-400 mr-1">★</span>
+                  <span className="text-white">
+                    {places.find(place => place.name === selectedPlace)?.rating}
+                  </span>
+                </div>
+              </div>
+              <button
+                className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition-colors duration-300"
+                onClick={() => setSelectedPlace(null)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

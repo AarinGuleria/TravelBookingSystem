@@ -28,7 +28,19 @@ const App: React.FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <Header
                 onAuthClick={() => {
-                  /* Add your auth click handler here */
+                  // This prop passes a function to the Header component
+                  // that will be called when the user clicks on an authentication-related element
+                  // (like a login or signup button) in the Header.
+                  // The function is currently empty, but it's meant to be implemented
+                  // to handle authentication actions, such as opening a login modal.
+                  console.log("Authentication action triggered");
+                  // TODO: Implement authentication logic here
+                  // For example:
+                  // - Open a login/signup modal
+                  // - Redirect to a login/signup page
+                  // - Trigger an authentication state change
+
+                  
                 }}
               />
               <Routes>
