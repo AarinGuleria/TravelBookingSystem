@@ -111,7 +111,7 @@ function Header({ onAuthClick }: HeaderProps) {
               className="flex items-center flex-shrink-0"
             >
               <div className="text-2xl font-bold">
-                <span className="text-white dark:text-purple-400 hover:text-purple-200 dark:hover:text-purple-300 transition-colors duration-300">.fis</span>
+                <span className="text-white dark:text-purple-400 hover:text-purple-200 dark:hover:text-purple-300 transition-colors duration-300">ꌩā꓄ꋪā </span>
               </div>
             </motion.div>
             <div className="hidden lg:block flex-grow">

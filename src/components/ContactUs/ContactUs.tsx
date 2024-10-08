@@ -59,7 +59,7 @@ const ContactUs: React.FC = () => {
               <div className="bg-blue-100 p-2 rounded-full">
                 <FaEnvelope className="text-lg sm:text-xl text-blue-600" />
               </div>
-              <span className="text-base sm:text-lg text-gray-700">info@travelease.com</span>
+              <span className="text-base sm:text-lg text-gray-700">info@yatra.com</span>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.03 }}
@@ -78,7 +78,7 @@ const ContactUs: React.FC = () => {
                 <FaMapMarkerAlt className="text-lg sm:text-xl text-purple-600" />
               </div>
               <span className="text-base sm:text-lg text-gray-700">
-                123 TravelEase Street, New York, NY 10001
+                New Delhi, India
               </span>
             </motion.div>
           </motion.div>

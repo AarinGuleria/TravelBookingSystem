@@ -71,14 +71,14 @@ const AboutUs: React.FC = () => {
           variants={itemVariants}
           className="text-5xl md:text-6xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
         >
-          Discover TravelEase
+          Discover ꌩā꓄ꋪā 
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
           className="text-lg md:text-xl mb-16 text-center max-w-3xl mx-auto"
         >
-          Embark on a journey of discovery with TravelEase. We're not just about
+          Embark on a journey of discovery with ꌩā꓄ꋪā . We're not just about
           trips; we're about transforming your travel dreams into unforgettable
           realities.
         </motion.p>

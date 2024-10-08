@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-wrap justify-between items-center">
           <div className="w-full sm:w-auto mb-4 sm:mb-0">
-            <h3 className="text-xl font-bold text-purple-300 dark:text-purple-700">.fis</h3>
+            <h3 className="text-xl font-bold text-purple-300 dark:text-purple-700">ꌩā꓄ꋪā </h3>
             <p className="text-sm text-indigo-300 dark:text-indigo-700">Discover your perfect adventure</p>
           </div>
           {/* <div className="flex space-x-4 mb-4 sm:mb-0">
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-4 pt-4 border-t border-indigo-800 dark:border-indigo-300 text-center">
-          <p className="text-xs text-indigo-300 dark:text-indigo-700">&copy; 2023 .fis. All rights reserved.</p>
+          <p className="text-xs text-indigo-300 dark:text-indigo-700">&copy; 2024 ꌩā꓄ꋪā  All rights reserved.</p>
         </div>
       </div>
     </footer>
