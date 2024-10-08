@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="w-full lg:w-1/2 max-w-xl space-y-8 mb-12 lg:mb-0">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white dark:text-gray-800 leading-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white dark:text-gray-800 leading-tight ">
               Discover Your{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600 dark:from-purple-600 dark:to-indigo-700">
                 Perfect Adventure

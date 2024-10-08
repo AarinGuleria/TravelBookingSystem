@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { FaSun, FaMoon, FaBars, FaSearch, FaPlane, FaHotel, FaInfoCircle, FaEnvelope } from 'react-icons/fa';
+import { useState, useEffect, useRef } from 'react';
+import { FaSun, FaMoon, FaBars, FaSearch, FaPlane, FaHotel, FaInfoCircle, FaEnvelope, FaUser, FaCreditCard } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import AuthModal from './Authentication/AuthModal';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,6 +16,9 @@ function Header({ onAuthClick }: HeaderProps) {
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (darkMode) {
@@ -46,13 +49,19 @@ function Header({ onAuthClick }: HeaderProps) {
       if (showSearch && !(event.target as Element).closest('.search-container')) {
         setShowSearch(false);
       }
+      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+      if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showSearch]);
+  }, [showSearch, isMenuOpen, showUserMenu]);
 
   const handleAuthClick = (mode: 'login' | 'signup') => {
     setAuthMode(mode);
@@ -78,6 +87,11 @@ function Header({ onAuthClick }: HeaderProps) {
     { to: "/flightlisting", icon: <FaPlane />, text: "Flights" },
   ];
 
+  const userMenuItems = [
+    { to: "/accountinfo", icon: <FaUser />, text: "User Account" },
+    { to: "/paymentmethod", icon: <FaCreditCard />, text: "Payment Method" },
+  ];
+
   return (
     <>
       <motion.nav
@@ -86,7 +100,7 @@ function Header({ onAuthClick }: HeaderProps) {
         transition={{ type: 'spring', stiffness: 120 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg dark:bg-gray-900 dark:bg-opacity-70'
+            ? 'bg-gray-200 bg-opacity-90 backdrop-filter backdrop-blur-lg dark:bg-gray-950 dark:bg-opacity-80'
             : 'bg-gradient-to-r from-purple-400 to-pink-500 dark:from-gray-800 dark:to-gray-900'
         } shadow-lg mb-8`}
       >
@@ -133,6 +147,41 @@ function Header({ onAuthClick }: HeaderProps) {
               >
                 {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
               </motion.button>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative"
+              >
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="p-2 rounded-full bg-white bg-opacity-20 text-white hover:bg-opacity-30 transition-colors duration-300"
+                >
+                  <FaUser className="w-5 h-5" />
+                </button>
+                {showUserMenu && (
+                  <motion.div
+                    ref={userMenuRef}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10"
+                  >
+                    {userMenuItems.map((item) => (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300"
+                      >
+                        <span className="flex items-center">
+                          {item.icon}
+                          <span className="ml-2">{item.text}</span>
+                        </span>
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </motion.div>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -159,6 +208,7 @@ function Header({ onAuthClick }: HeaderProps) {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
+              ref={menuRef}
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -167,6 +217,12 @@ function Header({ onAuthClick }: HeaderProps) {
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navItems.map((item) => (
+                  <Link key={item.to} to={item.to} className="text-gray-700 dark:text-gray-300 hover:bg-purple-500 hover:text-white dark:hover:text-white px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 flex items-center space-x-2">
+                    {item.icon}
+                    <span>{item.text}</span>
+                  </Link>
+                ))}
+                {userMenuItems.map((item) => (
                   <Link key={item.to} to={item.to} className="text-gray-700 dark:text-gray-300 hover:bg-purple-500 hover:text-white dark:hover:text-white px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 flex items-center space-x-2">
                     {item.icon}
                     <span>{item.text}</span>

@@ -16,6 +16,8 @@ import FlightListingPage from "./components/FlightList/FlightListingPage";
 import HotelListing from "./components/Services/HotelListing";
 import ContactUs from "./components/ContactUs/ContactUs";
 import AboutUs from "./components/AboutUs/AboutUs";
+import PaymentMethod from "./components/UserInformation/paymentmethod";
+import AccountInfo from "./components/UserInformation/AccountInfo";
 
 const App: React.FC = () => {
   return (
@@ -45,11 +47,11 @@ const App: React.FC = () => {
                 />
                 <Route path="/flightlisting" element={<FlightListingPage />} />
                 <Route path="/hotellisting" element={<HotelListing />} />
-
                 <Route path="/contact" element={<ContactUs />} />
-
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/paymentmethod" element={<PaymentMethod />} />
+                <Route path="/accountinfo" element={<AccountInfo />} />
               </Routes>
             </div>
             <Footer />

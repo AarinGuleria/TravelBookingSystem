@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaPlane, FaClock, FaExchangeAlt, FaSuitcase, FaWifi, FaUtensils, FaChargingStation, FaTv } from 'react-icons/fa';
+import { FaPlane, FaClock, FaSuitcase, FaWifi, FaUtensils, FaChargingStation, FaTv, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Flight {
   airline: string;
@@ -24,222 +25,222 @@ interface Flight {
 
 const flightsData: Flight[] = [
   {
-    airline: "Korean Air",
-    logo: "https://example.com/korean-air-logo.png",
-    departureTime: "10:00 AM",
-    arrivalTime: "2:00 PM",
-    from: "Seoul",
-    to: "Tokyo",
-    duration: "4h",
+    airline: "SkyHigh Airlines",
+    logo: "https://example.com/skyhigh-logo.png",
+    departureTime: "08:00 AM",
+    arrivalTime: "11:30 AM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "5h 30m",
     layover: "Non-stop",
-    price: 450,
+    price: 350,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment"],
     details: [
       {
-        departureDate: 'Monday, August 12 - 10:00',
-        arrivalDate: 'Monday, August 12 - 14:00',
-        flightClass: 'Korean Air - Economy class',
-        airplaneType: 'Boeing 787 - KE 123',
-        transitTime: 'Non-stop'
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Boeing 787",
+        transitTime: "N/A"
       }
     ]
   },
   {
-    airline: "Singapore Airlines",
-    logo: "https://example.com/singapore-airlines-logo.png",
-    departureTime: "1:30 PM",
-    arrivalTime: "7:45 PM",
-    from: "Singapore",
-    to: "London",
-    duration: "13h 15m",
-    layover: "1 stop",
-    price: 1200,
-    priceClass: "Business",
-    amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
-    details: [
-      {
-        departureDate: 'Tuesday, August 13 - 13:30',
-        arrivalDate: 'Wednesday, August 14 - 19:45',
-        flightClass: 'Singapore Airlines - Business class',
-        airplaneType: 'Airbus A380 - SQ 322',
-        transitTime: '2 hours 30 minutes - Dubai (DXB)'
-      }
-    ]
-  },
-  {
-    airline: "Emirates",
-    logo: "https://example.com/emirates-logo.png",
-    departureTime: "11:45 PM",
-    arrivalTime: "6:15 AM",
-    from: "Dubai",
-    to: "New York",
-    duration: "14h 30m",
-    layover: "Non-stop",
-    price: 1500,
-    priceClass: "First Class",
-    amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
-    details: [
-      {
-        departureDate: 'Wednesday, August 14 - 23:45',
-        arrivalDate: 'Thursday, August 15 - 06:15',
-        flightClass: 'Emirates - First Class',
-        airplaneType: 'Airbus A380 - EK 201',
-        transitTime: 'Non-stop'
-      }
-    ]
-  },
-  {
-    airline: "Lufthansa",
-    logo: "https://example.com/lufthansa-logo.png",
-    departureTime: "8:30 AM",
-    arrivalTime: "10:45 AM",
-    from: "Frankfurt",
-    to: "Paris",
-    duration: "1h 15m",
-    layover: "Non-stop",
-    price: 200,
+    airline: "Ocean Air",
+    logo: "https://example.com/oceanair-logo.png",
+    departureTime: "10:15 AM",
+    arrivalTime: "03:45 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "7h 30m",
+    layover: "1 stop (2h in Chicago)",
+    price: 275,
     priceClass: "Economy",
-    amenities: ["wifi", "meal"],
+    amenities: ["wifi", "charging", "luggage"],
     details: [
       {
-        departureDate: 'Thursday, August 15 - 08:30',
-        arrivalDate: 'Thursday, August 15 - 10:45',
-        flightClass: 'Lufthansa - Economy class',
-        airplaneType: 'Airbus A320 - LH 1028',
-        transitTime: 'Non-stop'
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Airbus A320",
+        transitTime: "2h in Chicago (ORD)"
       }
     ]
   },
   {
-    airline: "Qatar Airways",
-    logo: "https://example.com/qatar-airways-logo.png",
-    departureTime: "9:20 PM",
-    arrivalTime: "5:40 PM",
-    from: "Doha",
-    to: "Los Angeles",
-    duration: "16h 20m",
+    airline: "Mountain Express",
+    logo: "https://example.com/mountainexpress-logo.png",
+    departureTime: "02:30 PM",
+    arrivalTime: "07:15 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "6h 45m",
     layover: "Non-stop",
-    price: 1800,
-    priceClass: "Business",
-    amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
-    details: [
-      {
-        departureDate: 'Friday, August 16 - 21:20',
-        arrivalDate: 'Saturday, August 17 - 17:40',
-        flightClass: 'Qatar Airways - Business class',
-        airplaneType: 'Boeing 777 - QR 739',
-        transitTime: 'Non-stop'
-      }
-    ]
-  },
-  {
-    airline: "British Airways",
-    logo: "https://example.com/british-airways-logo.png",
-    departureTime: "3:15 PM",
-    arrivalTime: "6:45 PM",
-    from: "London",
-    to: "Rome",
-    duration: "2h 30m",
-    layover: "Non-stop",
-    price: 180,
-    priceClass: "Economy",
-    amenities: ["wifi", "meal"],
-    details: [
-      {
-        departureDate: 'Saturday, August 17 - 15:15',
-        arrivalDate: 'Saturday, August 17 - 18:45',
-        flightClass: 'British Airways - Economy class',
-        airplaneType: 'Airbus A320 - BA 560',
-        transitTime: 'Non-stop'
-      }
-    ]
-  },
-  {
-    airline: "Air France",
-    logo: "https://example.com/air-france-logo.png",
-    departureTime: "7:00 AM",
-    arrivalTime: "9:10 AM",
-    from: "Paris",
-    to: "Amsterdam",
-    duration: "1h 10m",
-    layover: "Non-stop",
-    price: 120,
-    priceClass: "Economy",
-    amenities: ["wifi"],
-    details: [
-      {
-        departureDate: 'Sunday, August 18 - 07:00',
-        arrivalDate: 'Sunday, August 18 - 09:10',
-        flightClass: 'Air France - Economy class',
-        airplaneType: 'Embraer E190 - AF 1240',
-        transitTime: 'Non-stop'
-      }
-    ]
-  },
-  {
-    airline: "Japan Airlines",
-    logo: "https://example.com/japan-airlines-logo.png",
-    departureTime: "11:55 PM",
-    arrivalTime: "7:45 AM",
-    from: "Tokyo",
-    to: "San Francisco",
-    duration: "9h 50m",
-    layover: "Non-stop",
-    price: 950,
-    priceClass: "Premium Economy",
+    price: 420,
+    priceClass: "Economy Plus",
     amenities: ["wifi", "meal", "entertainment", "charging"],
     details: [
       {
-        departureDate: 'Monday, August 19 - 23:55',
-        arrivalDate: 'Tuesday, August 20 - 07:45',
-        flightClass: 'Japan Airlines - Premium Economy class',
-        airplaneType: 'Boeing 777 - JL 8',
-        transitTime: 'Non-stop'
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy Plus",
+        airplaneType: "Boeing 737 MAX",
+        transitTime: "N/A"
       }
     ]
   },
   {
-    airline: "Etihad Airways",
-    logo: "https://example.com/etihad-airways-logo.png",
-    departureTime: "2:10 AM",
-    arrivalTime: "7:40 AM",
-    from: "Abu Dhabi",
-    to: "Mumbai",
-    duration: "3h 30m",
+    airline: "Sunset Airways",
+    logo: "https://example.com/sunsetairways-logo.png",
+    departureTime: "06:45 AM",
+    arrivalTime: "12:30 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "5h 45m",
     layover: "Non-stop",
-    price: 300,
+    price: 380,
     priceClass: "Economy",
-    amenities: ["wifi", "meal", "entertainment"],
+    amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
     details: [
       {
-        departureDate: 'Tuesday, August 20 - 02:10',
-        arrivalDate: 'Tuesday, August 20 - 07:40',
-        flightClass: 'Etihad Airways - Economy class',
-        airplaneType: 'Boeing 787 - EY 204',
-        transitTime: 'Non-stop'
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Airbus A350",
+        transitTime: "N/A"
       }
     ]
   },
   {
-    airline: "Cathay Pacific",
-    logo: "https://example.com/cathay-pacific-logo.png",
-    departureTime: "12:35 PM",
-    arrivalTime: "5:15 PM",
-    from: "Hong Kong",
-    to: "Bangkok",
-    duration: "2h 40m",
+    airline: "Global Jet",
+    logo: "https://example.com/globaljet-logo.png",
+    departureTime: "11:30 AM",
+    arrivalTime: "05:15 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "7h 45m",
+    layover: "1 stop (1h 30m in Denver)",
+    price: 310,
+    priceClass: "Economy",
+    amenities: ["wifi", "charging"],
+    details: [
+      {
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Boeing 737",
+        transitTime: "1h 30m in Denver (DEN)"
+      }
+    ]
+  },
+  {
+    airline: "Swift Airlines",
+    logo: "https://example.com/swiftairlines-logo.png",
+    departureTime: "01:00 PM",
+    arrivalTime: "06:30 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "5h 30m",
     layover: "Non-stop",
-    price: 280,
+    price: 400,
+    priceClass: "Economy",
+    amenities: ["wifi", "meal", "entertainment", "charging"],
+    details: [
+      {
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Airbus A321neo",
+        transitTime: "N/A"
+      }
+    ]
+  },
+  {
+    airline: "Coastal Flights",
+    logo: "https://example.com/coastalflights-logo.png",
+    departureTime: "03:45 PM",
+    arrivalTime: "09:30 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "5h 45m",
+    layover: "Non-stop",
+    price: 365,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment"],
     details: [
       {
-        departureDate: 'Wednesday, August 21 - 12:35',
-        arrivalDate: 'Wednesday, August 21 - 17:15',
-        flightClass: 'Cathay Pacific - Economy class',
-        airplaneType: 'Airbus A330 - CX 717',
-        transitTime: 'Non-stop'
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Boeing 787-9",
+        transitTime: "N/A"
+      }
+    ]
+  },
+  {
+    airline: "Metro Air",
+    logo: "https://example.com/metroair-logo.png",
+    departureTime: "07:30 AM",
+    arrivalTime: "02:15 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "6h 45m",
+    layover: "1 stop (1h in Atlanta)",
+    price: 290,
+    priceClass: "Economy",
+    amenities: ["wifi", "charging", "luggage"],
+    details: [
+      {
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Airbus A320",
+        transitTime: "1h in Atlanta (ATL)"
+      }
+    ]
+  },
+  {
+    airline: "Skyline Express",
+    logo: "https://example.com/skylineexpress-logo.png",
+    departureTime: "09:15 AM",
+    arrivalTime: "02:45 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "5h 30m",
+    layover: "Non-stop",
+    price: 410,
+    priceClass: "Economy Plus",
+    amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
+    details: [
+      {
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy Plus",
+        airplaneType: "Boeing 787-10",
+        transitTime: "N/A"
+      }
+    ]
+  },
+  {
+    airline: "Horizon Airlines",
+    logo: "https://example.com/horizonairlines-logo.png",
+    departureTime: "12:30 PM",
+    arrivalTime: "06:15 PM",
+    from: "New York (JFK)",
+    to: "Los Angeles (LAX)",
+    duration: "5h 45m",
+    layover: "Non-stop",
+    price: 385,
+    priceClass: "Economy",
+    amenities: ["wifi", "meal", "entertainment", "charging"],
+    details: [
+      {
+        departureDate: "2023-07-15",
+        arrivalDate: "2023-07-15",
+        flightClass: "Economy",
+        airplaneType: "Airbus A330",
+        transitTime: "N/A"
       }
     ]
   }
@@ -280,10 +281,35 @@ const FlightListingPage: React.FC = () => {
     }
   };
 
+  const calculateJourneyProgress = (departureTime: string, arrivalTime: string) => {
+    const now = new Date();
+    const departure = new Date(now.toDateString() + ' ' + departureTime);
+    const arrival = new Date(now.toDateString() + ' ' + arrivalTime);
+    
+    if (now < departure) return 0;
+    if (now > arrival) return 100;
+    
+    const totalDuration = arrival.getTime() - departure.getTime();
+    const elapsedTime = now.getTime() - departure.getTime();
+    return (elapsedTime / totalDuration) * 100;
+  };
+
   return (
-    <div className="flight-page-container max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300">
-      <h1 className="text-3xl font-bold mb-6">Flight Listings</h1>
-      <div className="filter-section flex flex-wrap justify-between items-center mb-6 gap-4">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="flight-page-container max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300"
+    >
+      <motion.h1 
+        initial={{ y: -20 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-3xl font-bold mb-8 mt-16 text-center"
+      >
+        Flight Listings
+      </motion.h1>
+      <div className="filter-section flex flex-wrap justify-center items-center mb-6 gap-4">
         <select className="filter-dropdown bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 py-2 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
           <option value="all">Airlines</option>
           {Array.from(new Set(flightsData.map(flight => flight.airline))).map(airline => (
@@ -312,16 +338,27 @@ const FlightListingPage: React.FC = () => {
           <option value="1500">Up to $1,500</option>
           <option value="2000">Up to $2,000</option>
         </select>
-        <button className="filter-button bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 shadow-md" onClick={filterFlights}>
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="filter-button bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 shadow-md"
+          onClick={filterFlights}
+        >
           Filter
-        </button>
+        </motion.button>
       </div>
 
       <div className="flight-list space-y-6">
         {filteredFlights.map((flight, index) => (
-          <div key={index} className="flight-item bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <div className="flight-summary flex flex-col sm:flex-row justify-between items-center" onClick={() => toggleFlightDetails(index)}>
-              <div className="flight-info flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-4 sm:mb-0">
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="flight-item bg-gray-100 dark:bg-gray-700 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          >
+            <div className="flight-summary flex flex-col lg:flex-row justify-between items-center cursor-pointer" onClick={() => toggleFlightDetails(index)}>
+              <div className="flight-info flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-4 lg:mb-0">
                 <img src={flight.logo} alt={`${flight.airline} logo`} className="airline-logo w-16 h-16 object-contain bg-white dark:bg-gray-600 p-2 rounded-full" />
                 <div className="flight-details text-center sm:text-left">
                   <p className="airline-name text-lg font-semibold">{flight.airline}</p>
@@ -329,63 +366,111 @@ const FlightListingPage: React.FC = () => {
                     <FaPlane className="text-purple-600 dark:text-purple-400" />
                     <p className="flight-route">{`${flight.from} ➡️ ${flight.to}`}</p>
                   </div>
-                  <div className="flex items-center justify-center sm:justify-start space-x-2 text-gray-600 dark:text-gray-300">
-                    <FaClock className="text-purple-600 dark:text-purple-400" />
-                    <p className="flight-time">{`${flight.departureTime} - ${flight.arrivalTime}`}</p>
+                  <div className="flight-timeline relative mt-4 mb-2">
+                    <div className="h-1 bg-purple-200 dark:bg-purple-700 rounded-full"></div>
+                    <div className="absolute left-0 top-0 h-1 bg-purple-600 dark:bg-purple-400 rounded-full" style={{width: '100%'}}></div>
+                    <div className="flex justify-between mt-1">
+                      <div className="text-sm">
+                        <p className="font-semibold">{flight.departureTime}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{flight.details[0].departureDate}</p>
+                      </div>
+                      <div className="text-sm text-right">
+                        <p className="font-semibold">{flight.arrivalTime}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{flight.details[0].arrivalDate}</p>
+                      </div>
+                    </div>
                   </div>
                   <div className="flex items-center justify-center sm:justify-start space-x-2 text-gray-600 dark:text-gray-300">
-                    <FaExchangeAlt className="text-purple-600 dark:text-purple-400" />
+                    <FaClock className="text-purple-600 dark:text-purple-400" />
                     <p className="flight-duration">{flight.duration}</p>
                   </div>
                   <p className="flight-layover text-sm text-gray-500 dark:text-gray-400">{flight.layover}</p>
                 </div>
               </div>
-              <div className="flight-price-details flex flex-col items-center sm:items-end space-y-2">
+              <div className="flight-price-details flex flex-col items-center lg:items-end space-y-2">
                 <div className="flight-price text-2xl font-bold text-purple-600 dark:text-purple-400">
                   ${flight.price.toLocaleString()}
                 </div>
                 <span className="price-type text-sm text-gray-500 dark:text-gray-400">{flight.priceClass}</span>
                 <div className="amenities flex space-x-2">
                   {flight.amenities.map((amenity, idx) => (
-                    <span key={idx} title={amenity} className="text-lg">
+                    <motion.span 
+                      key={idx} 
+                      title={amenity} 
+                      className="text-lg"
+                      whileHover={{ scale: 1.2 }}
+                    >
                       {getAmenityIcon(amenity)}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-                <button className="view-details-button bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 shadow-md">
-                  {expandedIndex === index ? '▲ Hide Details' : '▼ View Details'}
-                </button>
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="view-details-button bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 shadow-md flex items-center space-x-2"
+                >
+                  <span>{expandedIndex === index ? 'Hide Details' : 'View Details'}</span>
+                  {expandedIndex === index ? <FaChevronUp /> : <FaChevronDown />}
+                </motion.button>
               </div>
             </div>
 
             {/* Collapsible Flight Details */}
-            {expandedIndex === index && flight.details.length > 0 && (
-              <div className="flight-expanded-details bg-white dark:bg-gray-600 mt-4 p-4 rounded-lg">
-                {flight.details.map((detail, idx) => (
-                  <div key={idx} className="detail-item mb-4">
-                    <div className="flex justify-between">
-                      <p>{detail.departureDate}</p>
-                      <p>{detail.arrivalDate}</p>
-                    </div>
-                    <div className="text-gray-600 dark:text-gray-300">
-                      <p>{detail.flightClass} - {detail.airplaneType}</p>
-                      <p>{`Transit time: ${detail.transitTime}`}</p>
-                    </div>
-                    <hr className="my-2 border-gray-300 dark:border-gray-500" />
+            <AnimatePresence>
+              {expandedIndex === index && flight.details.length > 0 && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flight-expanded-details bg-white dark:bg-gray-600 mt-4 p-6 rounded-lg shadow-inner"
+                >
+                  <div className="relative">
+                    {flight.details.map((detail, idx) => (
+                      <div key={idx} className="detail-item mb-6 relative pl-8">
+                        <div className="absolute left-3 top-2 w-4 h-4 bg-purple-500 rounded-full border-2 border-white dark:border-gray-600"></div>
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                          <p className="font-semibold text-purple-600 dark:text-purple-400">{detail.departureDate}</p>
+                          <p className="font-semibold text-purple-600 dark:text-purple-400">{detail.arrivalDate}</p>
+                        </div>
+                        <div className="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                          <p className="mb-2"><span className="font-medium">Class:</span> {detail.flightClass}</p>
+                          <p className="mb-2"><span className="font-medium">Aircraft:</span> {detail.airplaneType}</p>
+                          <p><span className="font-medium">Transit time:</span> {detail.transitTime}</p>
+                        </div>
+                        <div className="mt-4">
+                          <p className="font-medium mb-2">Live Journey Status:</p>
+                          <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div 
+                              className="absolute top-0 left-0 h-full bg-green-500 transition-all duration-1000 ease-in-out"
+                              style={{ width: `${calculateJourneyProgress(flight.departureTime, flight.arrivalTime)}%` }}
+                            ></div>
+                          </div>
+                          <div className="flex justify-between mt-1 text-sm text-gray-600 dark:text-gray-400">
+                            <span>{flight.departureTime}</span>
+                            <span>{flight.arrivalTime}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
 
       <div className="flex justify-center mt-8">
-        <button className="load-more-button bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-400 px-8 py-3 rounded-lg hover:bg-purple-600 hover:text-white dark:hover:bg-purple-400 dark:hover:text-gray-900 transition-colors duration-300 shadow-md">
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="load-more-button bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 border-2 border-purple-600 dark:border-purple-400 px-8 py-3 rounded-lg hover:bg-purple-600 hover:text-white dark:hover:bg-purple-400 dark:hover:text-gray-900 transition-colors duration-300 shadow-md"
+        >
           Show more
-        </button>
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
