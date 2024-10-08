@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+# ꌩā꓄ꋪā - Your Ultimate Travel Companion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+ꌩā꓄ꋪā is a modern, user-friendly travel application built with React, TypeScript, and Vite. It provides a seamless experience for users to discover, explore, and book accommodations around the world.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Featured Places**: Browse through a curated list of popular destinations and accommodations.
+- **City Filters**: Quickly filter accommodations by major cities like New York, Tokyo, Paris, and London.
+- **Detailed Listings**: View comprehensive information about each accommodation, including images, pricing, and ratings.
+- **Dark Mode**: Enjoy a comfortable viewing experience with our dark mode option.
+- **Responsive Design**: Access ꌩā꓄ꋪā on any device with our fully responsive layout.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+### Prerequisites
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Node.js (v14 or later)
+- npm or yarn
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Installation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/yatra-travel-app.git
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+2. Navigate to the project directory:
+   ```
+   cd yatra-travel-app
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+   or
+   ```
+   yarn install
+   ```
+
+4. Start the development server:
+   ```
+   npm run dev
+   ```
+   or
+   ```
+   yarn dev
+   ```
+
+5. Open your browser and visit `http://localhost:5173` to see the app in action.
+
+## Technologies Used
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+
+## Contributing
+
+We welcome contributions to ꌩā꓄ꋪā! Please read our [Contributing Guide](CONTRIBUTING.md) for more information on how to get started.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Thanks to all the contributors who have helped shape ꌩā꓄ꋪā.
+- Special thanks to the React, TypeScript, and Vite communities for their excellent tools and documentation.
