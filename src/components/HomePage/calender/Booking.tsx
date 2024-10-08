@@ -86,7 +86,7 @@ const Booking: React.FC = () => {
             <DatePicker
               selected={checkInDate}
               onChange={(date) => setCheckInDate(date)}
-              dateFormat="dd MMM"
+              dateFormat="dd MMM yyyy"
               className="text-sm font-bold bg-transparent focus:outline-none text-indigo-900 dark:text-indigo-300 cursor-pointer"
               popperPlacement="bottom"
               popperModifiers={[
@@ -109,7 +109,7 @@ const Booking: React.FC = () => {
             <DatePicker
               selected={checkOutDate}
               onChange={(date) => setCheckOutDate(date)}
-              dateFormat="dd MMM"
+              dateFormat="dd MMM yyyy"
               className="text-sm font-bold bg-transparent focus:outline-none text-indigo-900 dark:text-indigo-300 cursor-pointer"
               popperPlacement="bottom"
               popperModifiers={[

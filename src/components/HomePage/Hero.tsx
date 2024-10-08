@@ -119,7 +119,7 @@ const FeaturedPlacesToStay: React.FC = () => {
   return (
     <section className="py-16 bg-gradient-to-br from-indigo-900 to-purple-900 dark:from-gray-100 dark:to-gray-200 transition-colors duration-300">
       {/* Glassmorphism background for light theme */}
-      <div className="absolute inset-0 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg hidden dark:block"></div>
+      <div className="absolute inset-0 bg-white bg-opacity-100 backdrop-filter backdrop-blur-lg hidden dark:block"></div>
 
       {/* Royal blurred color circles */}
       <div className="absolute top-0 right-0 w-128 h-128 bg-royal-blue rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>

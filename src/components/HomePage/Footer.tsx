@@ -14,11 +14,11 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-bold text-purple-300 dark:text-purple-700">.fis</h3>
             <p className="text-sm text-indigo-300 dark:text-indigo-700">Discover your perfect adventure</p>
           </div>
-          <div className="flex space-x-4 mb-4 sm:mb-0">
+          {/* <div className="flex space-x-4 mb-4 sm:mb-0">
             {["Home", "About", "Services", "Contact"].map((item) => (
               <a key={item} href="#" className="text-sm text-indigo-300 dark:text-indigo-700 hover:text-white dark:hover:text-gray-900 transition-colors duration-300">{item}</a>
             ))}
-          </div>
+          </div> */}
           <div className="flex space-x-4">
             {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map((Icon, index) => (
               <a key={index} href="#" className="text-indigo-300 dark:text-indigo-700 hover:text-white dark:hover:text-gray-900 transition-colors duration-300">
