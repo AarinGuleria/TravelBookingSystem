@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaUser,
   FaEnvelope,
@@ -9,8 +9,12 @@ import {
   FaCamera,
   FaCheck,
   FaTimes,
+  FaPlane,
+  FaSuitcase,
+  FaPassport,
 } from "react-icons/fa";
 import { useTheme } from "../../Context/ThemeContext";
+import Confetti from 'react-confetti';
 
 const ProfileForm: React.FC = () => {
   const [name, setName] = useState("");
@@ -25,6 +29,7 @@ const ProfileForm: React.FC = () => {
     success: boolean;
     message: string;
   } | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
@@ -75,6 +80,8 @@ const ProfileForm: React.FC = () => {
           success: true,
           message: "Profile updated successfully!",
         });
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 5000);
       } catch (error) {
         setSubmitResult({
           success: false,
@@ -124,31 +131,52 @@ const ProfileForm: React.FC = () => {
       transition={{ duration: 0.5 }}
       className={containerClass}
     >
+      {showConfetti && <Confetti />}
       <h2 className="text-3xl font-bold mb-8 mt-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
         Update Your Profile
       </h2>
-      {submitResult && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className={`mb-4 p-3 rounded ${
-            submitResult.success
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {submitResult.success ? (
-            <FaCheck className="inline mr-2" />
-          ) : (
-            <FaTimes className="inline mr-2" />
-          )}
-          {submitResult.message}
+      <motion.div
+        className="flex justify-center space-x-4 mb-8"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+          <FaPlane className="text-4xl text-blue-500" />
         </motion.div>
-      )}
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+          <FaSuitcase className="text-4xl text-green-500" />
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+          <FaPassport className="text-4xl text-red-500" />
+        </motion.div>
+      </motion.div>
+      <AnimatePresence>
+        {submitResult && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className={`mb-4 p-3 rounded ${
+              submitResult.success
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {submitResult.success ? (
+              <FaCheck className="inline mr-2" />
+            ) : (
+              <FaTimes className="inline mr-2" />
+            )}
+            {submitResult.message}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="mb-8 flex justify-center">
         <div className="relative">
           <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
             className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-500 cursor-pointer"
             onClick={() => fileInputRef.current?.click()}
@@ -170,7 +198,7 @@ const ProfileForm: React.FC = () => {
             )}
           </motion.div>
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.1, rotate: 15 }}
             whileTap={{ scale: 0.9 }}
             className="absolute bottom-0 right-0 bg-purple-500 rounded-full p-2 cursor-pointer"
             onClick={() => fileInputRef.current?.click()}
@@ -187,7 +215,7 @@ const ProfileForm: React.FC = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <label htmlFor="name" className={labelClass}>
             <FaUser className="inline mr-2" />
             Name
@@ -201,8 +229,8 @@ const ProfileForm: React.FC = () => {
             placeholder="Enter your name"
           />
           {errors.name && <p className={errorClass}>{errors.name}</p>}
-        </div>
-        <div>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <label htmlFor="email" className={labelClass}>
             <FaEnvelope className="inline mr-2" />
             Email
@@ -216,8 +244,8 @@ const ProfileForm: React.FC = () => {
             placeholder="Enter your email"
           />
           {errors.email && <p className={errorClass}>{errors.email}</p>}
-        </div>
-        <div>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <label htmlFor="phone" className={labelClass}>
             <FaPhone className="inline mr-2" />
             Phone
@@ -231,8 +259,8 @@ const ProfileForm: React.FC = () => {
             placeholder="Enter your phone number"
           />
           {errors.phone && <p className={errorClass}>{errors.phone}</p>}
-        </div>
-        <div>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <label htmlFor="address" className={labelClass}>
             <FaMapMarkerAlt className="inline mr-2" />
             Address
@@ -246,8 +274,8 @@ const ProfileForm: React.FC = () => {
             placeholder="Enter your address"
           />
           {errors.address && <p className={errorClass}>{errors.address}</p>}
-        </div>
-        <div>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <label htmlFor="about" className={labelClass}>
             <FaInfoCircle className="inline mr-2" />
             About
@@ -259,10 +287,10 @@ const ProfileForm: React.FC = () => {
             className={`${inputClass} h-32 resize-none`}
             placeholder="Tell us about yourself"
           />
-        </div>
+        </motion.div>
         <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgb(167, 139, 250)" }}
+          whileTap={{ scale: 0.95 }}
           type="submit"
           className={buttonClass}
           disabled={isSubmitting}

@@ -12,6 +12,7 @@ const Booking: React.FC = () => {
   const [children, setChildren] = useState(2);
   const [infants, setInfants] = useState(1);
   const [showGuestOptions, setShowGuestOptions] = useState(false);
+  const [searchResult, setSearchResult] = useState<string | null>(null);
   const guestOptionsRef = useRef<HTMLDivElement>(null);
 
   const toggleGuestOptions = () => setShowGuestOptions(!showGuestOptions);
@@ -39,6 +40,18 @@ const Booking: React.FC = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleSearch = () => {
+    const randomResults = [
+      "5 amazing properties found!",
+      "3 luxurious villas available",
+      "7 cozy apartments in your desired location",
+      "2 exclusive penthouses match your criteria",
+      "4 family-friendly houses ready for booking",
+    ];
+    const randomIndex = Math.floor(Math.random() * randomResults.length);
+    setSearchResult(randomResults[randomIndex]);
+  };
 
   const customDatePickerStyles = `
     .react-datepicker {
@@ -73,23 +86,34 @@ const Booking: React.FC = () => {
     .react-datepicker__triangle {
       display: none;
     }
+    @media (max-width: 640px) {
+      .react-datepicker {
+        width: 100%;
+        max-width: 300px;
+      }
+      .react-datepicker__day-name, .react-datepicker__day {
+        width: 2rem;
+        line-height: 2rem;
+        margin: 0.1rem;
+      }
+    }
   `;
 
   return (
-    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-3/4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 p-1 flex justify-between items-center w-4/5 h-24 rounded-full space-x-2 transition-all duration-300 shadow-2xl z-20">
-      <div className="w-full h-full bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-8 space-x-4">
+    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 p-1 flex flex-col sm:flex-row justify-between items-center w-11/12 max-w-6xl rounded-3xl sm:rounded-full space-y-2 sm:space-y-0 sm:space-x-2 transition-all duration-300 shadow-2xl z-20">
+      <div className="w-full h-full bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-2xl sm:rounded-full flex flex-col sm:flex-row justify-between items-center p-4 sm:px-8 space-y-4 sm:space-y-0 sm:space-x-4">
         <style>{customDatePickerStyles}</style>
         
         {/* Check-in Date */}
-        <div className="relative flex items-center space-x-3 bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md">
+        <div className="relative flex items-center space-x-3 bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md w-full sm:w-auto">
           <FaCalendarAlt className="text-lg text-indigo-600 dark:text-indigo-400" />
-          <div>
+          <div className="w-full sm:w-auto">
             <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Check in</p>
             <DatePicker
               selected={checkInDate}
               onChange={(date) => setCheckInDate(date)}
               dateFormat="dd MMM yyyy"
-              className="text-sm font-bold bg-transparent focus:outline-none text-gray-800 dark:text-gray-200 cursor-pointer"
+              className="text-sm font-bold bg-transparent focus:outline-none text-gray-800 dark:text-gray-200 cursor-pointer w-full sm:w-auto"
               popperPlacement="bottom-start"
               popperModifiers={[
                 {
@@ -104,15 +128,15 @@ const Booking: React.FC = () => {
         </div>
 
         {/* Check-out Date */}
-        <div className="relative flex items-center space-x-3 bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md">
+        <div className="relative flex items-center space-x-3 bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md w-full sm:w-auto">
           <FaCalendarAlt className="text-lg text-indigo-600 dark:text-indigo-400" />
-          <div>
+          <div className="w-full sm:w-auto">
             <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Check out</p>
             <DatePicker
               selected={checkOutDate}
               onChange={(date) => setCheckOutDate(date)}
               dateFormat="dd MMM yyyy"
-              className="text-sm font-bold bg-transparent focus:outline-none text-gray-800 dark:text-gray-200 cursor-pointer"
+              className="text-sm font-bold bg-transparent focus:outline-none text-gray-800 dark:text-gray-200 cursor-pointer w-full sm:w-auto"
               popperPlacement="bottom-start"
               popperModifiers={[
                 {
@@ -127,9 +151,9 @@ const Booking: React.FC = () => {
         </div>
 
         {/* Guests */}
-        <div className="relative flex items-center space-x-3 bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md" ref={guestOptionsRef}>
+        <div className="relative flex items-center space-x-3 bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md w-full sm:w-auto" ref={guestOptionsRef}>
           <FaUser className="text-lg text-indigo-600 dark:text-indigo-400" />
-          <div>
+          <div className="w-full sm:w-auto">
             <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Guests</p>
             <div
               className="text-sm font-bold bg-transparent focus:outline-none text-gray-800 dark:text-gray-200 cursor-pointer"
@@ -140,7 +164,7 @@ const Booking: React.FC = () => {
 
             {/* Guest Options Dropdown */}
             {showGuestOptions && (
-              <div className="absolute top-14 right-0 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-xl space-y-4 z-30 border border-gray-200 dark:border-gray-700">
+              <div className="absolute top-14 right-0 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-xl space-y-4 z-30 border border-gray-200 dark:border-gray-700 w-full sm:w-64">
                 {/* Adults */}
                 <div className="flex justify-between items-center">
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">Adults</p>
@@ -206,10 +230,18 @@ const Booking: React.FC = () => {
         </div>
 
         {/* Search Button */}
-        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-700 transition-colors duration-300 shadow-lg">
-          <FiSearch className="text-xl text-white" />
+        <button 
+          className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-700 transition-colors duration-300 shadow-lg w-full sm:w-auto"
+          onClick={handleSearch}
+        >
+          <FiSearch className="text-xl text-white mx-auto" />
         </button>
       </div>
+      {searchResult && (
+        <div className="mt-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md text-center">
+          <p className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">{searchResult}</p>
+        </div>
+      )}
     </div>
   );
 };

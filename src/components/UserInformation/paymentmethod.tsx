@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaCreditCard, FaPaypal, FaApplePay, FaGooglePay } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaCreditCard, FaPaypal, FaApplePay, FaGooglePay, FaLock } from 'react-icons/fa';
 import { RiSecurePaymentLine } from 'react-icons/ri';
 import { useTheme } from '../../Context/ThemeContext';
+import confetti from 'canvas-confetti';
 
 const PaymentMethod: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
 
@@ -28,11 +30,11 @@ const PaymentMethod: React.FC = () => {
   }`;
 
   const methodClass = (method: string) => `
-    flex items-center p-3 sm:p-4 rounded-md cursor-pointer transition-colors duration-300
+    flex items-center p-3 sm:p-4 rounded-md cursor-pointer transition-all duration-300
     ${selectedMethod === method
       ? isDarkMode
-        ? 'bg-purple-700 text-white'
-        : 'bg-purple-100 text-purple-700'
+        ? 'bg-purple-700 text-white transform scale-105'
+        : 'bg-purple-100 text-purple-700 transform scale-105'
       : isDarkMode
       ? 'bg-gray-700 text-white hover:bg-gray-600'
       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -49,42 +51,84 @@ const PaymentMethod: React.FC = () => {
     switch (selectedMethod) {
       case 'Credit Card':
         return (
-          <div className="mt-4 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4 space-y-4"
+          >
             <input type="text" placeholder="Card Number" className={inputClass} />
             <div className="flex space-x-4">
               <input type="text" placeholder="MM/YY" className={`${inputClass} w-1/2`} />
               <input type="text" placeholder="CVV" className={`${inputClass} w-1/2`} />
             </div>
             <input type="text" placeholder="Cardholder Name" className={inputClass} />
-          </div>
+          </motion.div>
         );
       case 'PayPal':
         return (
-          <div className="mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4"
+          >
             <p>You will be redirected to PayPal to complete your payment.</p>
-          </div>
+          </motion.div>
         );
       case 'Apple Pay':
         return (
-          <div className="mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4"
+          >
             <p>Please confirm payment with your Apple device.</p>
-          </div>
+          </motion.div>
         );
       case 'Google Pay':
         return (
-          <div className="mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4"
+          >
             <p>Please confirm payment with your Google Pay account.</p>
-          </div>
+          </motion.div>
         );
       case 'UPI':
         return (
-          <div className="mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4"
+          >
             <input type="text" placeholder="Enter UPI ID" className={inputClass} />
-          </div>
+          </motion.div>
         );
       default:
         return null;
     }
+  };
+
+  const handlePayment = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }, 2000);
   };
 
   return (
@@ -99,7 +143,7 @@ const PaymentMethod: React.FC = () => {
         {paymentMethods.map((method) => (
           <motion.div
             key={method.name}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             className={methodClass(method.name)}
             onClick={() => setSelectedMethod(method.name)}
@@ -109,22 +153,28 @@ const PaymentMethod: React.FC = () => {
           </motion.div>
         ))}
       </div>
-      {selectedMethod && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          transition={{ duration: 0.3 }}
-        >
-          {renderPaymentForm()}
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {selectedMethod && renderPaymentForm()}
+      </AnimatePresence>
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={`${buttonClass} mt-4 sm:mt-6 text-sm sm:text-base`}
-        disabled={!selectedMethod}
+        className={`${buttonClass} mt-4 sm:mt-6 text-sm sm:text-base flex items-center justify-center`}
+        disabled={!selectedMethod || isProcessing}
+        onClick={handlePayment}
       >
-        {selectedMethod ? `Pay with ${selectedMethod}` : 'Select a payment method'}
+        {isProcessing ? (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="mr-2"
+          >
+            <FaLock />
+          </motion.div>
+        ) : (
+          <FaLock className="mr-2" />
+        )}
+        {isProcessing ? 'Processing...' : (selectedMethod ? `Pay with ${selectedMethod}` : 'Select a payment method')}
       </motion.button>
     </motion.div>
   );
