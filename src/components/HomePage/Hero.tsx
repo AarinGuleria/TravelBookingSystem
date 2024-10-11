@@ -1,5 +1,5 @@
 // Homepage imports
-import React from "react";
+import React, { useState } from "react";
 
 // Hero component
 const Hero: React.FC = () => {
@@ -132,7 +132,9 @@ const Benefits: React.FC = () => {
 
 // FeaturedPlacesToStay component
 const FeaturedPlacesToStay: React.FC = () => {
-  const [selectedPlace, setSelectedPlace] = React.useState<string | null>(null);
+  const [selectedPlace, setSelectedPlace] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   const places = [
     {
@@ -143,6 +145,7 @@ const FeaturedPlacesToStay: React.FC = () => {
       price: "$28/night",
       rating: 28,
       description: "A cozy cabin nestled in the woods, perfect for large groups or family gatherings.",
+      city: "New York",
     },
     {
       title: "Entire cabin - 6 beds",
@@ -152,6 +155,7 @@ const FeaturedPlacesToStay: React.FC = () => {
       price: "$250/night",
       rating: 45,
       description: "Charming inn with a rustic feel, offering comfort and a taste of local hospitality.",
+      city: "Tokyo",
     },
     {
       title: "Luxury apartment - 3 beds",
@@ -161,6 +165,7 @@ const FeaturedPlacesToStay: React.FC = () => {
       price: "$500/night",
       rating: 49,
       description: "Opulent city living with breathtaking views and world-class amenities.",
+      city: "Paris",
     },
     {
       title: "Beachfront villa - 8 beds",
@@ -170,6 +175,7 @@ const FeaturedPlacesToStay: React.FC = () => {
       price: "$350/night",
       rating: 47,
       description: "Luxurious beachfront property offering stunning ocean views and direct beach access.",
+      city: "London",
     },
     {
       title: "Mountain chalet - 5 beds",
@@ -179,6 +185,7 @@ const FeaturedPlacesToStay: React.FC = () => {
       price: "$180/night",
       rating: 41,
       description: "Scenic mountain getaway perfect for ski enthusiasts and nature lovers.",
+      city: "New York",
     },
     {
       title: "City loft - 2 beds",
@@ -188,8 +195,22 @@ const FeaturedPlacesToStay: React.FC = () => {
       price: "$150/night",
       rating: 39,
       description: "Modern loft in the heart of the city, ideal for urban explorers and business travelers.",
+      city: "Tokyo",
     },
   ];
+
+  const cities = ["New York", "Tokyo", "Paris", "London"];
+
+  const handleCityClick = (city: string) => {
+    setSelectedCity(city);
+    const placesInCity = places.filter(place => place.city === city);
+    setMessage(`Found ${placesInCity.length} places to stay in ${city}!`);
+    setTimeout(() => setMessage(null), 3000); // Hide message after 3 seconds
+  };
+
+  const filteredPlaces = selectedCity
+    ? places.filter(place => place.city === selectedCity)
+    : places;
 
   return (
     <section className="py-16 bg-gradient-to-br from-indigo-900 to-purple-900 relative">
@@ -212,19 +233,30 @@ const FeaturedPlacesToStay: React.FC = () => {
           Popular places that .fis recommends for your next adventure
         </p>
 
-        <div className="flex space-x-4 mb-8 overflow-x-auto pb-2">
-          {["New York", "Tokyo", "Paris", "London"].map((city) => (
+        <div className="flex space-x-4 mb-8 overflow-x-auto pb-4">
+          {cities.map((city) => (
             <button
               key={city}
-              className="px-6 py-2 bg-indigo-800 bg-opacity-50 backdrop-filter backdrop-blur-lg text-white rounded-full hover:bg-opacity-75 transition-all duration-300 shadow-md"
+              className={`px-6 py-3 bg-indigo-600 bg-opacity-80 text-white rounded-full hover:bg-opacity-100 transition-all duration-300 shadow-lg transform hover:scale-105 focus:outline-none ${
+                selectedCity === city
+                  ? 'bg-opacity-100 shadow-inner'
+                  : ''
+              }`}
+              onClick={() => handleCityClick(city)}
             >
-              {city}
+              <span className="text-lg font-semibold">{city}</span>
             </button>
           ))}
         </div>
 
+        {message && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-6 py-3 rounded-full shadow-lg z-50 animate-fade-in-out">
+            <span className="text-lg font-semibold">{message}</span>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {places.map((place, index) => (
+          {filteredPlaces.map((place, index) => (
             <div
               key={index}
               className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
@@ -313,11 +345,11 @@ const Videos: React.FC = () => {
       src: "https://www.youtube.com/watch?v=QVoSgRbd69c",
     },
     {
-      title: "Adventure Travel Guide",
+      title: "Adventure Travel Guide: Tokyo",
       views: "890K views",
       duration: "12:45",
       category: "Adventure",
-      src: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      src: "https://www.youtube.com/watch?v=cS-hFKC_RKI",
     },
     {
       title: "Hidden Gems of Europe",
