@@ -57,12 +57,12 @@ const hotelData: Hotel = {
     "bicycle-rental",
   ],
   images: [
-    "src/assets/images/elements/hotel view.jpg",
-    "src/assets/images/elements/bedroom.jpg",
-    "src/assets/images/elements/gym.jpg",
-    "src/assets/images/elements/hall.jpg",
-    "src/assets/images/elements/scenery.jpg",
-    "src/assets/images/elements/scnery.jpg",
+    "src/assets/elements/hotel view.jpg",
+    "src/assets/elements/bedroom.jpg",
+    "src/assets/elements/gym.jpg",
+    "src/assets/elements/hall.jpg",
+    "src/assets/elements/scenery.jpg",
+    "src/assets/elements/scnery.jpg",
   ],
 };
 

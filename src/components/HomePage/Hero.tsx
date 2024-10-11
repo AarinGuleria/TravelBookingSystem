@@ -40,12 +40,12 @@ const Hero: React.FC = () => {
           <div className="w-full lg:w-1/2 relative">
             <div className="grid grid-cols-2 gap-6 transform rotate-3 hover:rotate-0 transition-all duration-500">
               <img
-                src="src\assets\images\elements\hero-right.png"
+                src="src\assets\elements\hero-right.png"
                 alt="Adventure"
                 className="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"
               />
               <img
-                src="src\assets\images\elements\hero-right2.png"
+                src="src\assets\elements\hero-right2.png"
                 alt="Luxury Hotel"
                 className="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"
               />
@@ -137,7 +137,7 @@ const FeaturedPlacesToStay: React.FC = () => {
   const places = [
     {
       title: "Entire cabin - 10 beds",
-      src: "src/assets/images/elements/hotel view.jpg",
+      src: "src/assets/elements/hotel view.jpg",
       name: "Best Western Cedars...",
       address: "1 Anzinger Court",
       price: "$28/night",
@@ -146,7 +146,7 @@ const FeaturedPlacesToStay: React.FC = () => {
     },
     {
       title: "Entire cabin - 6 beds",
-      src: "/src/assets/images/elements/hero-right-3.png",
+      src: "/src/assets/elements/hero-right-3.png",
       name: "Bell By Greene King Inns",
       address: "32923 Judy Hill",
       price: "$250/night",
@@ -155,7 +155,7 @@ const FeaturedPlacesToStay: React.FC = () => {
     },
     {
       title: "Luxury apartment - 3 beds",
-      src: "/src/assets/images/elements/villa2.webp",
+      src: "/src/assets/elements/villa2.webp",
       name: "The Ritz-Carlton Residences",
       address: "15 Central Park West",
       price: "$500/night",
@@ -164,7 +164,7 @@ const FeaturedPlacesToStay: React.FC = () => {
     },
     {
       title: "Beachfront villa - 8 beds",
-      src: "/src/assets/images/elements/villa1.jpg",
+      src: "/src/assets/elements/villa1.jpg",
       name: "Sunset Paradise Resort",
       address: "789 Ocean Drive",
       price: "$350/night",
@@ -173,7 +173,7 @@ const FeaturedPlacesToStay: React.FC = () => {
     },
     {
       title: "Mountain chalet - 5 beds",
-      src: "/src/assets/images/elements/villa3.webp",
+      src: "/src/assets/elements/villa3.webp",
       name: "Alpine Lodge Retreat",
       address: "42 Evergreen Lane",
       price: "$180/night",
@@ -182,7 +182,7 @@ const FeaturedPlacesToStay: React.FC = () => {
     },
     {
       title: "City loft - 2 beds",
-      src: "/src/assets/images/elements/villa4.jpg",
+      src: "/src/assets/elements/villa4.jpg",
       name: "Urban Oasis Suites",
       address: "567 Downtown Avenue",
       price: "$150/night",

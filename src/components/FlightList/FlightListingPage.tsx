@@ -26,7 +26,7 @@ interface Flight {
 const flightsData: Flight[] = [
   {
     airline: "SkyHigh Airlines",
-    logo: "src/assets/images/flights/_swift-swift.png",
+    logo: "src/assets/flights/_swift-swift.png",
     departureTime: "08:00 AM",
     arrivalTime: "11:30 AM",
     from: "New York (JFK)",
@@ -48,7 +48,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Ocean Air",
-    logo: "src/assets/images/flights/ocean air.png",
+    logo: "src/assets/flights/ocean air.png",
     departureTime: "10:15 AM",
     arrivalTime: "03:45 PM",
     from: "New York (JFK)",
@@ -70,7 +70,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Mountain Express",
-    logo: "src/assets/images/flights/mountain-experss_4x.jpg",
+    logo: "src/assets/flights/mountain-experss_4x.jpg",
     departureTime: "02:30 PM",
     arrivalTime: "07:15 PM",
     from: "New York (JFK)",
@@ -92,7 +92,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Sunset Airways",
-    logo: "src/assets/images/flights/sunset-flight.webp",
+    logo: "src/assets/flights/sunset-flight.webp",
     departureTime: "06:45 AM",
     arrivalTime: "12:30 PM",
     from: "New York (JFK)",
@@ -114,7 +114,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Global Jet",
-    logo: "src/assets/images/flights/global jet.png",
+    logo: "src/assets/flights/global jet.png",
     departureTime: "11:30 AM",
     arrivalTime: "05:15 PM",
     from: "New York (JFK)",
@@ -136,7 +136,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Swift Airlines",
-    logo: "src/assets/images/flights/_swift-swift.png",
+    logo: "src/assets/flights/_swift-swift.png",
     departureTime: "01:00 PM",
     arrivalTime: "06:30 PM",
     from: "New York (JFK)",
@@ -158,7 +158,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Coastal Flights",
-    logo: "hsrc/assets/images/flights/coastal flight.png",
+    logo: "hsrc/assets/flights/coastal flight.png",
     departureTime: "03:45 PM",
     arrivalTime: "09:30 PM",
     from: "New York (JFK)",
@@ -180,7 +180,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Metro Air",
-    logo: "src/assets/images/flights/Metro_Airlines_Logo,_July_1974.png",
+    logo: "src/assets/flights/Metro_Airlines_Logo,_July_1974.png",
     departureTime: "07:30 AM",
     arrivalTime: "02:15 PM",
     from: "New York (JFK)",
@@ -202,7 +202,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Skyline Express",
-    logo: "src/assets/images/flights/skyline express.jpg",
+    logo: "src/assets/flights/skyline express.jpg",
     departureTime: "09:15 AM",
     arrivalTime: "02:45 PM",
     from: "New York (JFK)",
@@ -224,7 +224,7 @@ const flightsData: Flight[] = [
   },
   {
     airline: "Horizon Airlines",
-    logo: "src/assets/images/flights/horizon air.png",
+    logo: "src/assets/flights/horizon air.png",
     departureTime: "12:30 PM",
     arrivalTime: "06:15 PM",
     from: "New York (JFK)",
