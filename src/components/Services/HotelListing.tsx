@@ -47,7 +47,7 @@ const hotelData: Hotel = {
   bedrooms: 10,
   description:
     "Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides accommodation, an outdoor swimming pool, a bar, a shared lounge, a garden and barbecue facilities. Complimentary WiFi is provided. There is a private bathroom with bidet in all units, along with a hairdryer and free toiletries. The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental service and a car rental service are available at the accommodation, while cycling can be enjoyed nearby.",
-  pricePerNight: 26,
+  pricePerNight: 2145, // Changed to approximate INR equivalent
   amenities: [
     "wifi",
     "restaurant",
@@ -200,7 +200,7 @@ const HotelCard: React.FC<{ hotel: Hotel }> = ({ hotel }) => {
           </div>
           <div className="flex justify-between items-center">
             <div className="text-3xl font-bold">
-              ${hotel.pricePerNight}{" "}
+              ₹{hotel.pricePerNight}{" "}
               <span className="text-sm font-normal">/ night</span>
             </div>
             <motion.button

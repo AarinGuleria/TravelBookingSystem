@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCreditCard, FaPaypal, FaApplePay, FaGooglePay, FaLock } from 'react-icons/fa';
+import { FaCreditCard, FaPaypal, FaApplePay, FaGooglePay, FaLock, FaCheckCircle } from 'react-icons/fa';
 import { RiSecurePaymentLine } from 'react-icons/ri';
 import { useTheme } from '../../Context/ThemeContext';
 import confetti from 'canvas-confetti';
@@ -8,6 +8,7 @@ import confetti from 'canvas-confetti';
 const PaymentMethod: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const { theme } = useTheme();
   const isDarkMode = theme === 'dark';
 
@@ -123,6 +124,7 @@ const PaymentMethod: React.FC = () => {
     setIsProcessing(true);
     setTimeout(() => {
       setIsProcessing(false);
+      setPaymentSuccess(true);
       confetti({
         particleCount: 100,
         spread: 70,
@@ -160,7 +162,7 @@ const PaymentMethod: React.FC = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={`${buttonClass} mt-4 sm:mt-6 text-sm sm:text-base flex items-center justify-center`}
-        disabled={!selectedMethod || isProcessing}
+        disabled={!selectedMethod || isProcessing || paymentSuccess}
         onClick={handlePayment}
       >
         {isProcessing ? (
@@ -176,6 +178,22 @@ const PaymentMethod: React.FC = () => {
         )}
         {isProcessing ? 'Processing...' : (selectedMethod ? `Pay with ${selectedMethod}` : 'Select a payment method')}
       </motion.button>
+      <AnimatePresence>
+        {paymentSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className={`mt-4 p-4 rounded-lg ${isDarkMode ? 'bg-green-800' : 'bg-green-100'} flex items-center justify-center`}
+          >
+            <FaCheckCircle className={`text-2xl mr-2 ${isDarkMode ? 'text-green-300' : 'text-green-500'}`} />
+            <span className={`text-lg font-semibold ${isDarkMode ? 'text-green-300' : 'text-green-700'}`}>
+              Payment Successful! Thank you for your purchase.
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

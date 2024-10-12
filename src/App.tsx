@@ -12,7 +12,8 @@ import Footer from "./components/HomePage/Footer";
 import "./App.css";
 import Booking from "./components/HomePage/calender/Booking";
 import { HelmetProvider } from "react-helmet-async";
-import FlightListingPage from "./components/FlightList/FlightListingPage";
+import CarListingPage from "./components/TransportServices/CarLisitingPage";
+import FlightListingPage from "./components/TransportServices/FlightListingPage";
 import HotelListing from "./components/Services/HotelListing";
 import ContactUs from "./components/ContactUs/ContactUs";
 import AboutUs from "./components/AboutUs/AboutUs";
@@ -57,6 +58,7 @@ const App: React.FC = () => {
                     </div>
                   }
                 />
+                <Route path="/carlisting" element={<CarListingPage />} />
                 <Route path="/flightlisting" element={<FlightListingPage />} />
                 <Route path="/hotellisting" element={<HotelListing />} />
                 <Route path="/contact" element={<ContactUs />} />

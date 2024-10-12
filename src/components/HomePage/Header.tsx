@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaSun, FaMoon, FaBars, FaSearch, FaPlane, FaHotel, FaInfoCircle, FaEnvelope, FaUser, FaCreditCard } from 'react-icons/fa';
+import { FaSun, FaMoon, FaBars, FaSearch, FaPlane, FaHotel, FaInfoCircle, FaEnvelope, FaUser, FaCreditCard, FaCar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import AuthModal from './Authentication/AuthModal';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../../Context/ThemeContext';
 
 interface HeaderProps {
   onAuthClick: () => void;
 }
 
 function Header({ onAuthClick }: HeaderProps) {
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const darkMode = theme === 'dark';
+  const toggleDarkMode = () => toggleTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -21,27 +24,12 @@ function Header({ onAuthClick }: HeaderProps) {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -58,9 +46,7 @@ function Header({ onAuthClick }: HeaderProps) {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showSearch, isMenuOpen, showUserMenu]);
 
   const handleAuthClick = (mode: 'login' | 'signup') => {
@@ -75,8 +61,8 @@ function Header({ onAuthClick }: HeaderProps) {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Implement search functionality here
     console.log('Searching for:', searchQuery);
+    // Implement search functionality here
   };
 
   const navItems = [
@@ -85,6 +71,7 @@ function Header({ onAuthClick }: HeaderProps) {
     { to: "/hotellisting", icon: <FaHotel />, text: "Hotels" },
     { to: "/contact-us", icon: <FaEnvelope />, text: "Contact" },
     { to: "/flightlisting", icon: <FaPlane />, text: "Flights" },
+    { to: "/carlisting", icon: <FaCar />, text: "Cars" }
   ];
 
   const userMenuItems = [
@@ -142,7 +129,7 @@ function Header({ onAuthClick }: HeaderProps) {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={toggleDarkMode}
                 className="p-2 rounded-full bg-white bg-opacity-20 text-white hover:bg-opacity-30 transition-colors duration-300"
               >
                 {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
@@ -234,7 +221,7 @@ function Header({ onAuthClick }: HeaderProps) {
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => setDarkMode(!darkMode)}
+                    onClick={toggleDarkMode}
                     className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
                   >
                     {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}

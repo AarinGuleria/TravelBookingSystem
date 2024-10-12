@@ -33,7 +33,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "5h 30m",
     layover: "Non-stop",
-    price: 350,
+    price: 28875,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment"],
     details: [
@@ -55,7 +55,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "7h 30m",
     layover: "1 stop (2h in Chicago)",
-    price: 275,
+    price: 22687,
     priceClass: "Economy",
     amenities: ["wifi", "charging", "luggage"],
     details: [
@@ -77,7 +77,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "6h 45m",
     layover: "Non-stop",
-    price: 420,
+    price: 34650,
     priceClass: "Economy Plus",
     amenities: ["wifi", "meal", "entertainment", "charging"],
     details: [
@@ -99,7 +99,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "5h 45m",
     layover: "Non-stop",
-    price: 380,
+    price: 31350,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
     details: [
@@ -121,7 +121,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "7h 45m",
     layover: "1 stop (1h 30m in Denver)",
-    price: 310,
+    price: 25575,
     priceClass: "Economy",
     amenities: ["wifi", "charging"],
     details: [
@@ -143,7 +143,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "5h 30m",
     layover: "Non-stop",
-    price: 400,
+    price: 33000,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment", "charging"],
     details: [
@@ -165,7 +165,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "5h 45m",
     layover: "Non-stop",
-    price: 365,
+    price: 30112,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment"],
     details: [
@@ -187,7 +187,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "6h 45m",
     layover: "1 stop (1h in Atlanta)",
-    price: 290,
+    price: 23925,
     priceClass: "Economy",
     amenities: ["wifi", "charging", "luggage"],
     details: [
@@ -209,7 +209,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "5h 30m",
     layover: "Non-stop",
-    price: 410,
+    price: 33825,
     priceClass: "Economy Plus",
     amenities: ["wifi", "meal", "entertainment", "charging", "luggage"],
     details: [
@@ -231,7 +231,7 @@ const flightsData: Flight[] = [
     to: "Los Angeles (LAX)",
     duration: "5h 45m",
     layover: "Non-stop",
-    price: 385,
+    price: 31762,
     priceClass: "Economy",
     amenities: ["wifi", "meal", "entertainment", "charging"],
     details: [
@@ -248,7 +248,7 @@ const flightsData: Flight[] = [
 
 const FlightListingPage: React.FC = () => {
   const [filteredFlights, setFilteredFlights] = useState<Flight[]>(flightsData);
-  const [maxPrice, setMaxPrice] = useState<number>(5000);
+  const [maxPrice, setMaxPrice] = useState<number>(500000);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -332,11 +332,11 @@ const FlightListingPage: React.FC = () => {
           className="filter-dropdown bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 py-2 px-4 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           onChange={(e) => setMaxPrice(Number(e.target.value))}
         >
-          <option value="5000">All Prices</option>
-          <option value="500">Up to $500</option>
-          <option value="1000">Up to $1,000</option>
-          <option value="1500">Up to $1,500</option>
-          <option value="2000">Up to $2,000</option>
+          <option value="500000">All Prices</option>
+          <option value="25000">Up to ₹25,000</option>
+          <option value="50000">Up to ₹50,000</option>
+          <option value="75000">Up to ₹75,000</option>
+          <option value="100000">Up to ₹100,000</option>
         </select>
         <motion.button 
           whileHover={{ scale: 1.05 }}
