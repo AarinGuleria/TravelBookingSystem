@@ -63,8 +63,6 @@
 - TypeScript
 - Vite
 - Tailwind CSS
-- Three.js (for 3D elements)
-- AR.js (for augmented reality features)
 
 ## 🤝 Contributing
 
