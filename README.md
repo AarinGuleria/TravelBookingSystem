@@ -13,7 +13,7 @@
 - **Featured Places**: Browse through a curated list of popular destinations and accommodations.
 - **City Filters**: Quickly filter accommodations by major cities like New York, Tokyo, Paris, and London.
 - **Detailed Listings**: View comprehensive information about each accommodation, including images, pricing, and ratings.
-- **Dark Mode**: Enjoy a comfortable viewing experience with our dark mode option.
+- **Dark Mode and Light Mode**: Enjoy a comfortable viewing experience with our dark and light mode option.
 - **Responsive Design**: Access ꌩā꓄ꋪā on any device with our fully responsive layout.
 - **3D Map Exploration**: Dive into an immersive 3D globe to discover destinations.
 - **AR Room Preview**: Use augmented reality to visualize hotel rooms before booking.
