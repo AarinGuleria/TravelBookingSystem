@@ -84,6 +84,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🌟 Interactive Elements
 
 - **Hover Effects**: Experience delightful animations when hovering over destination cards.
+
+## 🌟 Future Scopes
+
 - **Parallax Scrolling**: Enjoy a sense of depth as you scroll through our immersive landing page.
 - **Dynamic Weather**: See real-time weather updates for your selected destinations.
 - **Virtual Tours**: Take 360° virtual tours of selected accommodations before booking.
