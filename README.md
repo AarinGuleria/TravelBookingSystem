@@ -13,7 +13,7 @@
 - **Featured Places**: Browse through a curated list of popular destinations and accommodations.
 - **City Filters**: Quickly filter accommodations by major cities like New York, Tokyo, Paris, and London.
 - **Detailed Listings**: View comprehensive information about each accommodation, including images, pricing, and ratings.
-- **Dark Mode**: Enjoy a comfortable viewing experience with our dark mode option.
+- **Dark Mode and Light Mode**: Enjoy a comfortable viewing experience with our dark and light mode option.
 - **Responsive Design**: Access ꌩā꓄ꋪā on any device with our fully responsive layout.
 - **3D Map Exploration**: Dive into an immersive 3D globe to discover destinations.
 - **AR Room Preview**: Use augmented reality to visualize hotel rooms before booking.
@@ -63,8 +63,6 @@
 - TypeScript
 - Vite
 - Tailwind CSS
-- Three.js (for 3D elements)
-- AR.js (for augmented reality features)
 
 ## 🤝 Contributing
 
@@ -86,6 +84,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🌟 Interactive Elements
 
 - **Hover Effects**: Experience delightful animations when hovering over destination cards.
+
+## 🌟 Future Scopes
+
 - **Parallax Scrolling**: Enjoy a sense of depth as you scroll through our immersive landing page.
 - **Dynamic Weather**: See real-time weather updates for your selected destinations.
 - **Virtual Tours**: Take 360° virtual tours of selected accommodations before booking.
